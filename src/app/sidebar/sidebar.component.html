@@ -1,0 +1,8 @@
+<div id="sidebar" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeSidebar()">&times;</a>
+  <a routerLink="/login" *ngIf="auth.loggedIn && auth.admin">Login</a>
+  <a routerLink="/users" *ngIf="auth.loggedIn && auth.admin">Usuarios</a>
+  <a routerLink="/guests" *ngIf="auth.loggedIn && auth.admin">Invitados</a>
+  <a href="#" *ngIf="auth.loggedIn && auth.admin">Contact</a>
+</div>
+

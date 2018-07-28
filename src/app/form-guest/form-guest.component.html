@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form [formGroup]="formGuest" (ngSubmit)="onSubmit()">
+        <h3 class="text-center">Formulario de invitado</h3>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name" class="control-label">Nombre completo</label>
+                <input type="text" formControlName="_id" class="form-control" hidden>
+                <input type="text" formControlName="fullname" class="form-control" 
+                      [ngClass]="{ 'is-invalid': submitted && formControls.fullname.errors }" id="fullname"
+                  placeholder="Ingrese su nombre completo">
+                <div *ngIf="submitted && formControls.fullname.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.fullname.errors.required">Nombre completo es requerido</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="age" class="control-label">Edad</label>
+                <input type="number" formControlName="age" class="form-control" 
+                      [ngClass]="{ 'is-invalid': submitted && formControls.age.errors }"
+                  id="age" placeholder="Ingrese su edad">
+                <div *ngIf="submitted && formControls.age.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.age.errors.required">Edad es requerido</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="username" class="control-label">Usuario</label>
+                <input type="text" formControlName="username" class="form-control" id="username" 
+                      [ngClass]="{ 'is-invalid': submitted && formControls.username.errors }"
+                  placeholder="Ingrese su usuario">
+                <div *ngIf="submitted && formControls.username.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.username.errors.required">Usuario es requerido</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="pin" class="control-label">Pin</label>
+                <input type="password" formControlName="pin" class="form-control" 
+                      [ngClass]="{ 'is-invalid': submitted && formControls.password.errors }"
+                  id="pin" placeholder="Ingrese su pin">
+                <div class="text-danger" *ngIf="submitted && pinConfirm.errors || pin.invalid && (pin.dirty || pin.touched)">
+                    Pin es requerida
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="pinConfirmation" class="control-label">Confirmación</label>
+                <input type="password" formControlName="pinConfirm" required class="form-control" id="pinConfirmation" [ngClass]="{ 'is-invalid': submitted && formControls.pinConfirmation.errors }"
+                  placeholder="Ingrese la confirmación">
+                <div class="text-danger" *ngIf="submitted && pinConfirm.errors || (submitted &&  pinConfirm.invalid && (pinConfirm.dirty || pinConfirm.touched))">
+                  <div *ngIf="pinConfirm.errors['required']">Confirmación requerida</div>
+                  <div *ngIf="pinConfirm.errors['compare']">No son iguales</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-right">
+              <button type="submit" class="btn btn-primary" [disabled]="formGuest.invalid">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

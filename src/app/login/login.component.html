@@ -1,0 +1,95 @@
+<div class="container" id="loginCT">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-12 col-md-8 col-lg-4 col-xl-4 text-center">
+        <div class="form-group">
+      <label for="email">INGRESAR COMO</label>
+        </div>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button class="btn btn-lg btn-outline-primary" id="btnAdminShow" (click)="openModal(modalAdminLogin)">Administrador</button>
+        <button class="btn btn-lg btn-outline-primary" id="btnGestShow" (click)="openModal(modalGuestLogin)">Invitado</button>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #modalAdminLogin let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Login usuario</h4>
+    <button type="button" class="close" aria-label="Close" id="closeModal" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="adminForm" (ngSubmit)="loginAdmin()">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="email" class="control-label">Email</label>
+              <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && adminFrmControls.email.errors }"
+                id="email" placeholder="Ingrese su email">
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="adminFrmControls.email.errors.required">Nombre es requerido</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="password" class="control-label">Contraseña</label>
+              <input type="text" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && adminFrmControls.password.errors }"
+                id="password" placeholder="Ingrese sus apellidos">
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="adminFrmControls.password.errors.required">Contraseña es requerido</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-primary" [disabled]="adminForm.invalid">Ingresar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template #modalGuestLogin let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Login invitado</h4>
+    <button type="button" class="close" aria-label="Close" id="closeModal" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="guestForm" (ngSubmit)="loginGuest()">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="username" class="control-label">Usuario</label>
+              <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && guestFrmControls.username.errors }"
+                id="username" placeholder="Ingrese su usuario">
+              <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="guestFrmControls.username.errors.required">Usuario es requerido</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="pin" class="control-label">Pin</label>
+              <input type="text" formControlName="pin" class="form-control" [ngClass]="{ 'is-invalid': submitted && guestFrmControls.pin.errors }"
+                id="pin" placeholder="Ingrese sus pin">
+              <div *ngIf="submitted && f.pin.errors" class="invalid-feedback">
+                <div *ngIf="guestFrmControls.pin.errors.required">Pin es requerido</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-primary" [disabled]="guestForm.invalid">Ingresar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
