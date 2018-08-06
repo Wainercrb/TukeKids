@@ -28,9 +28,6 @@ export class NavbarComponent implements OnInit {
  
   }
   
-  openSidebar() {
-    document.getElementById("sidebar").style.width = "250px";
-  }
 
   
 }

@@ -8,7 +8,6 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="name" class="control-label">Nombre completo</label>
-                <input type="text" formControlName="_id" class="form-control" hidden>
                 <input type="text" formControlName="fullname" class="form-control" 
                       [ngClass]="{ 'is-invalid': submitted && formControls.fullname.errors }" id="fullname"
                   placeholder="Ingrese su nombre completo">
@@ -21,7 +20,7 @@
               <div class="form-group">
                 <label for="age" class="control-label">Edad</label>
                 <input type="number" formControlName="age" class="form-control" 
-                      [ngClass]="{ 'is-invalid': submitted && formControls.age.errors }"
+                        ng-minlength=0 ng-maxlength="18" [ngClass]="{ 'is-invalid': submitted && formControls.age.errors }"
                   id="age" placeholder="Ingrese su edad">
                 <div *ngIf="submitted && formControls.age.errors" class="invalid-feedback">
                   <div *ngIf="formControls.age.errors.required">Edad es requerido</div>

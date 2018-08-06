@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <div id="heaader-user-table">
-        <button class="btn btn-lg btn-outline-primary" (click)="newUser()">Nuevo</button>
+          <a class="btn btn-light" routerLink="/nuevo-invitado">Nuevo</a>
       </div>
       <table class="table table-striped" [mfData]="guests" #mf="mfDataTable" [mfRowsOnPage]="5">
         <thead>
@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of mf.data">
+          <tr *ngFor="let item of mf.data; let i = index" [attr.data-index]="i">
             <td>{{item.fullname}}</td>
             <td>{{item.age}}</td>
             <td>{{item.username}}</td>

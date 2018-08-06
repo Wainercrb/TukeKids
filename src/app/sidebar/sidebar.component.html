@@ -1,8 +1,10 @@
 <div id="sidebar" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" (click)="closeSidebar()">&times;</a>
-  <a routerLink="/login" *ngIf="auth.loggedIn && auth.admin">Login</a>
-  <a routerLink="/users" *ngIf="auth.loggedIn && auth.admin">Usuarios</a>
-  <a routerLink="/guests" *ngIf="auth.loggedIn && auth.admin">Invitados</a>
-  <a href="#" *ngIf="auth.loggedIn && auth.admin">Contact</a>
+  <a onclick="" href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
+  <a routerLink="/login-usuario" *ngIf="!auth.loggedIn">Login Usuario</a>
+  <a routerLink="/login-invitado" *ngIf="!auth.loggedIn">Login Invitado</a>
+  <a routerLink="/usuarios" *ngIf="auth.loggedIn && auth.admin">Usuarios</a>
+  <a routerLink="/invitados" *ngIf="auth.loggedIn && auth.admin">Invitados</a>
+  <a routerLink="/administrar-videos" *ngIf="auth.loggedIn && auth.admin">Administrar videos</a>
 </div>
+
 

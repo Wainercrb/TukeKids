@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <div id="heaader-user-table">
-        <button class="btn btn-lg btn-outline-primary" id="modalShow" (click)="openModal(content)">Nuevo</button>
+        <a class="btn btn-lg btn-outline-primary" routerLink="/nuevo-usuario">Nuevo</a>
       </div>
       <!-- <table datatable id="example" [dtOptions]="dtOptions" class="row-border hover">
         <thead>
@@ -41,9 +41,12 @@
       <table class="table table-striped" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="5">
           <thead>
             <tr>
-              <th style="width: 15%">
-                <mfDefaultSorter by="name">Nombre</mfDefaultSorter>
+              <th style="width: 5%">
+                <mfDefaultSorter by="position">#</mfDefaultSorter>
               </th>
+              <th style="width: 15%">
+                  <mfDefaultSorter by="name">Nombre</mfDefaultSorter>
+                </th>
               <th style="width: 20%">
                 <mfDefaultSorter by="surnames">Apellidos</mfDefaultSorter>
               </th>
@@ -62,15 +65,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of mf.data">
+            <tr *ngFor="let item of mf.data; let i = index" [attr.data-index]="i">
+              <td>{{i}}</td>
               <td>{{item.name}}</td>
               <td>{{item.surnames}}</td>
               <td>{{item.email}}</td>
               <td>{{item.birthDate}}</td>
               <td>{{item.country}}</td>
               <td>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-secondary" (click)="editUser(item._id, i)">Editar</button>
+                <div class="btn-group" role="group">
+                  <a class="btn btn-secondary" routerLink="/actualizar-usuario/{{item._id}}">Editar</a>
                   <button type="button" class="btn btn-warning" (click)="deleteUser(item._id, i)">Eliminar</button>
                 </div>
               </td>
@@ -87,105 +91,3 @@
     </div>
   </div>
 </div>
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Formulario de usuario</h4>
-    <button type="button" class="close" aria-label="Close" id="closeModal" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-5">
-            <div class="form-group">
-              <label for="name" class="control-label">Nombre</label>
-              <input type="text" formControlName="_id" class="form-control" hidden>
-              <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" id="name"
-                placeholder="Ingrese su nombre">
-              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                <div *ngIf="f.name.errors.required">Nombre es requerido</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-7">
-            <div class="form-group">
-              <label for="surnames" class="control-label">Apellidos</label>
-              <input type="text" formControlName="surnames" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.surnames.errors }"
-                id="surnames" placeholder="Ingrese sus apellidos">
-              <div *ngIf="submitted && f.surnames.errors" class="invalid-feedback">
-                <div *ngIf="f.surnames.errors.required">Apellidos es requerido</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="country" class="control-label">Pais</label>
-              <input type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.country.errors }"
-                id="country" placeholder="Ingrese su país">
-              <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
-                <div *ngIf="f.country.errors.required">País es requerido</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="birthDate" class="control-label">Fecha Nacimiento</label>
-              <input type="date" class="form_datetime" formControlName="birthDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }"
-                id="birthDate" placeholder="Ingrese su Fecha de nacimiento">
-              <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
-                <div *ngIf="f.birthDate.errors.required">Fecha de nacimiento es requerido</div>
-                <div *ngIf="f.birthDate.errors.pattern">Fecha de nacimiento es requerido</div>
-                <!-- <div *ngIf="f.birthDate.errors.pattern">Formato invalido</div> -->
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="email" class="control-label">Email</label>
-              <input type="email" formControlName="email" class="form-control" id="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-                placeholder="Ingrese su email">
-              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                <div *ngIf="f.email.errors.required">Email es requerido</div>
-                <div *ngIf="f.email.errors.email">Ingresa un email valido</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="password" class="control-label">Contraseña</label>
-              <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                id="password" placeholder="Ingrese su contraseña">
-              <div class="text-danger" *ngIf="submitted && pwConfirm.errors || password.invalid && (password.dirty || password.touched)">
-                Contraseña es requerida
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="confirmPassword" class="control-label">Confirmación</label>
-              <input type="password" formControlName="passwordConfirm" required class="form-control" id="passwordConfirm" [ngClass]="{ 'is-invalid': submitted && f.passwordConfirm.errors }"
-                placeholder="Ingrese la confirmación">
-              <div class="text-danger" *ngIf="submitted && pwConfirm.errors || (submitted &&  pwConfirm.invalid && (pwConfirm.dirty || pwConfirm.touched))">
-                <div *ngIf="pwConfirm.errors['required']">Confirmación requerida</div>
-                <div *ngIf="pwConfirm.errors['compare']">No son iguales</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-right">
-            <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Guardar</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-</ng-template>

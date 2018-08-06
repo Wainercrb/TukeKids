@@ -9,7 +9,6 @@ import { UsersComponent } from './users/users.component';
 import { AppRoutingModule } from './/app-routing.module';
 import {DataTableModule} from "angular-6-datatable";
 import { HeaderComponent } from './header/header.component';
-import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -20,6 +19,16 @@ import { AuthGuard } from './services/auth.guard';
 import { GuestComponent } from './guest/guest.component';
 import { SideBarComponent } from './sidebar/sidebar.component';
 import { FormGuestComponent } from './form-guest/form-guest.component';
+import { FormUserComponent } from './form-user/form-user.component';
+import { LoginUserComponent } from './login-user/login-user.component';
+import { LoginGuestComponent } from './login-guest/login-guest.component';
+import { PublicVideosComponent } from './public-videos/public-videos.component';
+import { AdminVideosComponent } from './admin-videos/admin-videos.component';
+import { FormVideoComponent } from './form-video/form-video.component';
+import { GuestVideosComponent } from './guest-videos/guest-videos.component';
+import { VideoComponent } from './video/video.component';
+import { PlaylistComponent } from './playlist/playlist.component';
+import { FormPlaylistComponent } from './form-playlist/form-playlist.component';
 
 
 export function tokenGetter() {
@@ -33,12 +42,21 @@ export function tokenGetter() {
     AppComponent,
     UsersComponent,
     HeaderComponent,
-    LoginComponent,
     NavbarComponent,
     HomeComponent,
     GuestComponent,
     SideBarComponent,
     FormGuestComponent,
+    FormUserComponent,
+    LoginUserComponent,
+    LoginGuestComponent,
+    PublicVideosComponent,
+    AdminVideosComponent,
+    FormVideoComponent,
+    GuestVideosComponent,
+    VideoComponent,
+    PlaylistComponent,
+    FormPlaylistComponent,
   ],
   imports: [
     BrowserModule,

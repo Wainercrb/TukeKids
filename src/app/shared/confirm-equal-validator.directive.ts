@@ -18,18 +18,6 @@ export function compareValidator(controlNameToCompare: string): ValidatorFn {
   };
 }
 
-
-export function maxValue(max: Number): ValidatorFn {
-  return (control: AbstractControl): {[key: string]: any} => {
-    const input = control.value,
-          isValid = input > max;
-    if(isValid) 
-        return { 'maxValue': {max} }
-    else 
-        return null;
-  };
-}
-
 @Directive({
   selector: '[compare]',
   providers: [{ provide: NG_VALIDATORS, useExisting: CompareValidatorDirective, multi: true }]

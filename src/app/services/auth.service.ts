@@ -27,15 +27,15 @@ export class AuthService {
   // }
 
 
-  loginAdmin(newUser: User) {
-    const url = `${this.loginURL}/admin/${newUser.email}&${newUser.password}`
-    return this.http.get(url).pipe(
+  loginUser(user: User) {
+    const url = `${this.loginURL}/admin`
+    return this.http.post<User>(url, user).pipe(
       catchError(this.handleError)
     );
   }
-  loginGuest(Guest: Guest) {
-    const url = `${this.loginURL}/guest/${Guest.username}&${Guest.pin}`
-    return this.http.get(url).pipe(
+  loginGuest(guest: Guest) {
+    const url = `${this.loginURL}/guest`
+    return this.http.post<Guest>(url, guest).pipe(
       catchError(this.handleError)
     );
   }

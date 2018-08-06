@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-5 col-md-5 col-sm-5 col-xl-5">
+        <form [formGroup]="guestForm" (ngSubmit)="loginGuest()">
+          <h3 class="text-center">LOGIN INVITADO</h3>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="username" class="control-label">Usuario</label>
+                <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControls.username.errors }"
+                  placeholder="Ingrese su usuario" />
+                <div *ngIf="submitted && formControls.username.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.username.errors.required">Usuario requerido</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="pin" class="control-label">Pin</label>
+                <input type="password" formControlName="pin" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControls.pin.errors }"
+                  placeholder="Ingrese su contraseña" />
+                <div *ngIf="submitted && formControls.pin.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.pin.errors.required">Pin requerido</div>
+                  <div *ngIf="formControls.pin.errors.minlength">Pin muy corto</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group text-center">
+            <button class="btn btn-primary">Ingresar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-5 col-md-5 col-sm-5 col-xl-5">
+      <form [formGroup]="userForm" (ngSubmit)="loginUser()">
+        <h3 class="text-center">LOGIN USUARIO</h3>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="name" class="control-label">Email</label>
+              <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControls.email.errors }"
+                placeholder="Ingrese su email" />
+              <div *ngIf="submitted && formControls.email.errors" class="invalid-feedback">
+                <div *ngIf="formControls.email.errors.required">Email requerido</div>
+                <div *ngIf="formControls.email.errors.pattern">Email inválido</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="name" class="control-label">Contraseña</label>
+              <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControls.password.errors }"
+                placeholder="Ingrese su contraseña" />
+              <div *ngIf="submitted && formControls.password.errors" class="invalid-feedback">
+                <div *ngIf="formControls.password.errors.required">Contraseña requerida</div>
+                <div *ngIf="formControls.password.errors.minlength">Contraseña muy corta</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group text-center">
+          <button class="btn btn-primary">Ingresar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

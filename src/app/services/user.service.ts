@@ -9,7 +9,7 @@ import { User } from '../lib/user';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': sessionStorage.getItem('access-token')
+    'Authorization': `Bearer ${sessionStorage.getItem('access_token')}` 
   })
 };
 
@@ -28,7 +28,7 @@ export class UserService {
   //add new user to db
   //@user -> object to front-end
   addUser(user: User) {
-    return this.http.post(`${this.userURL}`, user).pipe(
+    return this.http.post(`${this.userURL}`,user, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -46,7 +46,7 @@ export class UserService {
   }
   //ge all users
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.userURL).
+    return this.http.get<User[]>(this.userURL, httpOptions).
       pipe(
         catchError(this.handleError)
       );
@@ -55,7 +55,7 @@ export class UserService {
   //@id -> id from front-end
   getUserById(id: string): Observable<{}> {
     const url = `${this.userURL}/${id}`;
-    return this.http.get<User>(url).pipe(
+    return this.http.get<User>(url, httpOptions).pipe(
       catchError(error => Observable.throw(error))
     );
   }

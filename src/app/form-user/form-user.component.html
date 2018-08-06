@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <form [formGroup]="formUser" (ngSubmit)="onSubmit()">
+          <h3 class="text-center">Formulario de usuario</h3>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="name" class="control-label">Nombre</label>
+                <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControls.name.errors }" id="name"
+                  placeholder="Ingrese su nombre">
+                <div *ngIf="submitted && formControls.name.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.name.errors.required">Nombre es requerido</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <div class="form-group">
+                <label for="surnames" class="control-label">Apellidos</label>
+                <input type="text" formControlName="surnames" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControls.surnames.errors }"
+                  id="surnames" placeholder="Ingrese sus apellidos">
+                <div *ngIf="submitted && formControls.surnames.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.surnames.errors.required">Apellidos es requerido</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="country" class="control-label">Pais</label>
+                <input type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControls.country.errors }"
+                  id="country" placeholder="Ingrese su país">
+                <div *ngIf="submitted && formControls.country.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.country.errors.required">País es requerido</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="birthDate" class="control-label">Fecha Nacimiento</label>
+                <input type="date" class="form_datetime" formControlName="birthDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControls.birthDate.errors }"
+                  id="birthDate" placeholder="Ingrese su Fecha de nacimiento">
+                <div *ngIf="submitted && formControls.birthDate.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.birthDate.errors.required">Fecha de nacimiento es requerido</div>
+                  <div *ngIf="formControls.birthDate.errors.pattern">Fecha de nacimiento es requerido</div>
+                  <!-- <div *ngIf="f.birthDate.errors.pattern">Formato invalido</div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="email" class="control-label">Email</label>
+                <input type="email" formControlName="email" class="form-control" id="email" [ngClass]="{ 'is-invalid': submitted && formControls.email.errors }"
+                  placeholder="Ingrese su email">
+                <div *ngIf="submitted && formControls.email.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.email.errors.required">Email es requerido</div>
+                  <div *ngIf="formControls.email.errors.email">Ingresa un email valido</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="password" class="control-label">Contraseña</label>
+                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControls.password.errors }"
+                  id="password" placeholder="Ingrese su contraseña">
+                <div class="text-danger" *ngIf="submitted && pwConfirm.errors || password.invalid && (password.dirty || password.touched)">
+                  Contraseña es requerida
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="confirmPassword" class="control-label">Confirmación</label>
+                <input type="password" formControlName="passwordConfirm" required class="form-control" id="passwordConfirm" [ngClass]="{ 'is-invalid': submitted && formControls.passwordConfirm.errors }"
+                  placeholder="Ingrese la confirmación">
+                <div class="text-danger" *ngIf="submitted && pwConfirm.errors || (submitted &&  pwConfirm.invalid && (pwConfirm.dirty || pwConfirm.touched))">
+                  <div *ngIf="pwConfirm.errors['required']">Confirmación requerida</div>
+                  <div *ngIf="pwConfirm.errors['compare']">No son iguales</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-right">
+              <button type="submit" class="btn btn-primary" [disabled]="formUser.invalid">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

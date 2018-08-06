@@ -13,8 +13,5 @@ export class SideBarComponent implements OnInit {
   ngOnInit() {
   }
   
-  closeSidebar() {
-    document.getElementById("sidebar").style.width = "0";
-  }
 
 }

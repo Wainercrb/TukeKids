@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3" *ngFor="let item of YTsnippet; let i = index">
+      <div class="body-img">
+        <a routerLink="/ver/{{item.id}}">
+          <img [src]='item.snippet.thumbnails.high.url' class="img-fluid" width="640" height="360">
+        </a>
+      </div>
+      <div class="footer-img">
+        <p class="text-center">{{item.snippet.title.length > 30?item.snippet.title.substring(0,30)+"....":item.snippet.title}}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-6 col-md-6 col-sm-6 col-xl-6">
+      <form [formGroup]="videoForm" (ngSubmit)="onSubmit()">
+        <h3 class="text-center">VIDEO</h3>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="name" class="control-label">URL</label>
+              <textarea pattern="http://www\.youtube\.com\/(.+)|https://www\.youtube\.com\/(.+)" name="url" id="url" cols="10" rows="5"
+                formControlName="url" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControls.url.errors }"
+                placeholder="Ingrese el url del video a guardar"></textarea>
+              <div *ngIf="submitted && formControls.url.errors" class="invalid-feedback">
+                <div *ngIf="formControls.url.errors.required">Email requerido</div>
+                <div *ngIf="formControls.url.errors.pattern">Email inválido</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="guest" class="control-label">Agregar a:</label>
+              <select class="custom-select" formControlName="guest" placeholder="Ingrese el url del video a guardar">
+                  <option value="" disabled selected>Seleccione el usuario</option>
+                <option value="{{guest._id}}" *ngFor="let guest of guests">{{guest.fullname}}</option>
+              </select>
+              <div *ngIf="submitted && formControls.guest.errors" class="invalid-feedback">
+                <div *ngIf="formControls.guest.errors.required">Usuario requrido</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group text-center">
+          <button class="btn btn-primary">Ingresar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

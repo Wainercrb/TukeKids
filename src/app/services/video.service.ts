@@ -3,66 +3,71 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs'
 import { Observable } from 'rxjs';
-import { Guest } from '../lib/guest';
+import { Video } from '../lib/video';
 
 //Header backend
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${sessionStorage.getItem('access_token')}` 
+    'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
   })
 };
 
 @Injectable({
   providedIn: 'root'
 })
-export class GuestService {
+export class VideoService {
 
-  //User URL API
-  private guestURL = 'http://localhost:3000/api/guest';
+
+  //Video URL API
+  private videoURL = 'http://localhost:3000/api/videos';
+
   constructor(private http: HttpClient) { }
 
-  //add new guest to db
-  //@guest -> object to front-end
-  addGuest(guest: Guest) {
-    return this.http.post(`${this.guestURL}`, guest, httpOptions).pipe(
+
+  //add new video to db
+  //@video -> object to front-end
+  addVideo(video: Video) {
+    alert();
+    return this.http.post(`${this.videoURL}`, video, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
-  //update guest
-  //@guest -> object from front-end
-  //@id -> id from front-end
-  updateGuest(guest: Guest, id: string) {
-    let url = `${this.guestURL}/${id}`;
-    if (guest.pin != "0000") {
-      url = `${this.guestURL}/pin/${id}`;
-    }
-    return this.http.put(url, guest, httpOptions).pipe(
-      catchError(this.handleError)
-    );
-  }
-  //get all guest
-  getGuest(): Observable<Guest[]> {
-    return this.http.get<Guest[]>(this.guestURL,httpOptions).pipe(
+
+  //get all videos by role
+  getVideosGuests(): Observable<Video[]> {
+    return this.http.get<Video[]>(this.videoURL, httpOptions).
+      pipe(
         catchError(this.handleError)
       );
   }
-  //get guest by id
+
+  //get all videos by role
+  getVideosAdmin(): Observable<Video[]> {
+    return this.http.get<Video[]>(this.videoURL, httpOptions).
+      pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  //ge all videos
+  getUserss(id): Observable<Video[]> {
+    return this.http.get<any>('https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=' + id + '&key=AIzaSyDQFJdLinZ94oC6GJD3s_IuxhBJuPRgtjM').
+      pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  //update video
+  //@video -> object from front-end
   //@id -> id from front-end
-  getGuestById(id: string): Observable<{}> {
-    const url = `${this.guestURL}/${id}`;
-    return this.http.get<Guest>(url, httpOptions).pipe(
-      catchError(error => Observable.throw(error))
+  updateVideo(video: Video, id: string) {
+    return this.http.put(this.videoURL, video).pipe(
+      catchError(this.handleError)
     );
   }
-  //delete guest 
-  //@id -> id from front-end 
-  deleteGuest(id: string): Observable<{}> {
-    const url = `${this.guestURL}/${id}`;
-    return this.http.delete(url, httpOptions).pipe(
-      catchError(error => Observable.throw(error))
-    );
-  }
+
   //get backed erros
   //@HttpErrorResponse -> angular error object
   private handleError(error: HttpErrorResponse) {
